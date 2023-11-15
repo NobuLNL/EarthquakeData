@@ -76,17 +76,17 @@
         let map = new mapboxgl.Map({
             container: 'map', // container ID
             style: 'mapbox://styles/mapbox/dark-v11', // style URL
-            zoom: 7.5, // starting zoom
-            center: [-120.5, 47.5] // starting center
+            zoom: 7, // starting zoom
+            center: [-120, 47.5] // starting center
         });
 
         async function geojsonFetch() {
 
-            let response, washfire, japan, table;
+            let response, washfire, washington, table;
             response = await fetch('assets/washfire.geojson');
             washfire = await response.json();
             response = await fetch('assets/washington.geojson');
-            japan = await response.json();
+            washington = await response.json();
 
             table = document.getElementsByTagName("table")[0];
             let row, cell1, cell2, cell3;
@@ -104,15 +104,15 @@
 
             map.on('load', function loadingData() {
 
-                map.addSource('japan', {
+                map.addSource('washington', {
                     type: 'geojson',
-                    data: japan
+                    data: washington
                 });
 
                 map.addLayer({
-                    'id': 'japan-layer',
+                    'id': 'washington-layer',
                     'type': 'fill',
-                    'source': 'japan',
+                    'source': 'washington',
                     'paint': {
                         'fill-color': '#0080ff', // blue color fill
                         'fill-opacity': 0.10
